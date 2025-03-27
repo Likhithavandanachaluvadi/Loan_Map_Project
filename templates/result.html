@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loan Map Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #42a5f5, #90caf9);
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background: #42a5f5; }
+            100% { background: #90caf9; }
+        }
+
+        .result-container {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.3;
+            animation: floatEmojis 15s linear infinite;
+        }
+
+        @keyframes floatEmojis {
+            0% { transform: translateY(0); opacity: 0.4; }
+            100% { transform: translateY(-500px); opacity: 0; }
+        }
+
+        h1 {
+            color: #1E88E5;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        .loading-bar {
+            width: 100%;
+            background-color: #E3F2FD;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .loading-bar div {
+            width: 0%;
+            height: 100%;
+            background-color: #1E88E5;
+            animation: load 2s forwards;
+        }
+
+        @keyframes load {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .approved {
+            color: #4CAF50;
+            font-weight: bold;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .not-approved {
+            color: #F44336;
+            font-weight: bold;
+            animation: shake 0.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #4CAF50; }
+            to { text-shadow: 0 0 20px #4CAF50; }
+        }
+
+        @keyframes shake {
+            from { transform: translateX(0); }
+            to { transform: translateX(3px); }
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #1E88E5;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background-color: #1565C0;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <div class="emoji" style="top: 10%; left: 5%;">💰</div>
+        <div class="emoji" style="top: 60%; left: 70%;">💵</div>
+        <div class="emoji" style="top: 40%; left: 30%;">💸</div>
+
+        <h1>💳 Loan Map Result 💳</h1>
+        <div class="loading-bar">
+            <div></div>
+        </div>
+        <p>Your loan status is: 
+            <span class="{{ 'approved' if result == 'Approved' else 'not-approved' }}">
+                {{ result }}
+            </span>
+        </p>
+
+        {% if result == "Approved" %}
+        <p>Estimated Loan Amount: <strong>₹{{ loan_amount }}</strong></p>
+        {% else %}
+        <p>Unfortunately, you are not eligible for a loan at this time.</p>
+        {% endif %}
+
+        <a href="/">Check Again</a>
+    </div>
+</body>
+</html>

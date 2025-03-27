@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loan Map</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #011941, #032d41);
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background: #a1c4fd; }
+            100% { background: #c2e9fb; }
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.2;
+            animation: floatEmojis 15s linear infinite;
+        }
+
+        @keyframes floatEmojis {
+            0% { transform: translateY(0); opacity: 0.4; }
+            100% { transform: translateY(-500px); opacity: 0; }
+        }
+
+        h1 {
+            color: #673AB7;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px #9575CD;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            text-align: left;
+            margin: 8px 0 4px;
+            font-weight: bold;
+            color: #673AB7;
+        }
+
+        select, input[type="text"] {
+            padding: 10px;
+            border: 2px solid #673AB7;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            background-color: #EDE7F6;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        select:hover, input[type="text"]:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #673AB7;
+        }
+
+        input[type="submit"] {
+            background-color: #673AB7;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        input[type="submit"]:hover::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.3);
+            animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+            from { opacity: 1; transform: scale(0); }
+            to { opacity: 0; transform: scale(2); }
+        }
+
+        #loading-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #673AB7;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: loading 2s forwards;
+        }
+
+        @keyframes loading {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji" style="top: 10%; left: 5%;">💰</div>
+        <div class="emoji" style="top: 60%; left: 70%;">💵</div>
+        <div class="emoji" style="top: 40%; left: 30%;">💸</div>
+        <div class="emoji" style="top: 20%; left: 90%;">🏦</div>
+        <div class="emoji" style="top: 70%; left: 10%;">🤑</div>
+
+        <h1>💳 Loan Map 💳</h1>
+        <form action="/loan" method="post" onsubmit="showLoadingBar()">
+            <div id="loading-bar"></div>
+
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="marital_status">Marital Status:</label>
+            <select name="marital_status" id="marital_status">
+                <option value="Married">Married</option>
+                <option value="Unmarried">Unmarried</option>
+            </select>
+
+            <label for="applicant_income">Applicant Income:</label>
+            <input type="text" name="applicant_income" id="applicant_income">
+
+            <label for="cibil_score">CIBIL Score:</label>
+            <input type="text" name="cibil_score" id="cibil_score">
+
+            <input type="submit" value="Check Eligibility">
+        </form>
+    </div>
+
+    <script>
+        function showLoadingBar() {
+            const loadingBar = document.getElementById('loading-bar');
+            loadingBar.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
